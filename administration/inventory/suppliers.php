@@ -80,8 +80,13 @@
                              <div class="panel-title-box">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $check = mysql_query("select * from tms_supplier");
-							  $nm = mysql_num_rows($check);
+                             $check = $connect->query("select * from tms_supplier");
+                            //  $fetch_data = mysqli_fetch_array($check);
+                            //  die(var_dump($fetch_data));
+                            $nm = mysqli_num_rows($check);
+
+                            //  echo $nm; exit;
+
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of registered suppliers (<?php echo $nm;?>)</h3>
                               </div>                                    
@@ -117,14 +122,18 @@
                                              <th>Email</th>
                                              <th>Location</th>
                                              <th>Action</th>
-                                             </tr>
-                                             <tr dir-paginate = "supplier in data | filter:search | itemsPerPage:6" >
-                                                 <td>{{supplier.name}} </td>
-                                                 <td>{{supplier.contact}}</td>
-                                                 <td>{{supplier.email}}</td>
-                                                 <td>{{supplier.location}}</td>
-                                                 <td><a href = "supplier_info.php?id={{supplier.name}}"><span class = "fa fa-info-circle"></span> More info</a></td>
+                                        </tr>
+                                             <!-- <tr dir-paginate = "supplier in data | filter:search | itemsPerPage:6" > -->
+                                            <?php while($data = mysqli_fetch_assoc($check)) {?>
+                                            <tr>
+                                                 <td><?php echo $data['name']; ?> </td>
+                                                 <td><?php echo $data['contact']; ?> </td>
+                                                 <td><?php echo $data['email']; ?> }</td>
+                                                 <td><?php echo $data['location']; ?> </td>
+                                                 <td><a href = "supplier_info.php?id=<?php echo $data['name']; ?>"><span class = "fa fa-info-circle"></span> More info</a></td>
                                             </tr>
+
+                                            <?php } ?>
                                                  
                                         </table>
                                      <dir-pagination-controls max-sixe="5"

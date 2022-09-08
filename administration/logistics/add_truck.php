@@ -6,39 +6,39 @@
  }
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $id = strtoupper(mysql_real_escape_string($_POST['id']));
-	  $name = strtoupper(mysql_real_escape_string($_POST['make']));
-	  $model = strtoupper(mysql_real_escape_string($_POST['model']));
-	  $color = strtoupper(mysql_real_escape_string($_POST['engine']));
-	  $btype = strtoupper(mysql_real_escape_string($_POST['btype']));
-	  $fuel = strtoupper(mysql_real_escape_string($_POST['fuels']));
-	  $chasis = mysql_real_escape_string($_POST['chasis']);
-	  $pdate = mysql_real_escape_string($_POST['pdate']);
-	  $sup = strtoupper(mysql_real_escape_string($_POST['sup']));
-	  $policyNO = mysql_real_escape_string($_POST['policyNO']);
-	  $insu_type = mysql_real_escape_string($_POST['insu_type']);
-	  $cont = mysql_real_escape_string($_POST['cont']);
-	  $load_price = mysql_real_escape_string($_POST['load_price']);
-	  $com_date = mysql_real_escape_string($_POST['com_date']);
-	  $exp_date = mysql_real_escape_string($_POST['exp_date']);
-	  $ins_date = mysql_real_escape_string($_POST['ins_date']);
-	  $ins_exp_date = mysql_real_escape_string($_POST['ins_exp_date']);
-	  $su_price = mysql_real_escape_string($_POST['su_price']);
-	  $su_date = mysql_real_escape_string($_POST['su_date']);
-	  $su_exp_date = mysql_real_escape_string($_POST['su_exp_date']);
+	  $id = strtoupper(mysqli_real_escape_string($_POST['id']));
+	  $name = strtoupper(mysqli_real_escape_string($_POST['make']));
+	  $model = strtoupper(mysqli_real_escape_string($_POST['model']));
+	  $color = strtoupper(mysqli_real_escape_string($_POST['engine']));
+	  $btype = strtoupper(mysqli_real_escape_string($_POST['btype']));
+	  $fuel = strtoupper(mysqli_real_escape_string($_POST['fuels']));
+	  $chasis = mysqli_real_escape_string($_POST['chasis']);
+	  $pdate = mysqli_real_escape_string($_POST['pdate']);
+	  $sup = strtoupper(mysqli_real_escape_string($_POST['sup']));
+	  $policyNO = mysqli_real_escape_string($_POST['policyNO']);
+	  $insu_type = mysqli_real_escape_string($_POST['insu_type']);
+	  $cont = mysqli_real_escape_string($_POST['cont']);
+	  $load_price = mysqli_real_escape_string($_POST['load_price']);
+	  $com_date = mysqli_real_escape_string($_POST['com_date']);
+	  $exp_date = mysqli_real_escape_string($_POST['exp_date']);
+	  $ins_date = mysqli_real_escape_string($_POST['ins_date']);
+	  $ins_exp_date = mysqli_real_escape_string($_POST['ins_exp_date']);
+	  $su_price = mysqli_real_escape_string($_POST['su_price']);
+	  $su_date = mysqli_real_escape_string($_POST['su_date']);
+	  $su_exp_date = mysqli_real_escape_string($_POST['su_exp_date']);
       $status = 0;
       
 	  if($id == ''){
 		  $er = "<div class = 'alert alert-danger flush'>Sorry truck registration must be filled</div>";
 	  }else{
-		   $truck = mysql_query("select * from tms_trucks where truck_id = '$id'");
-		    $num = mysql_num_rows($truck);
+		   $truck = $connect->query("select * from tms_trucks where truck_id = '$id'");
+		    $num = mysqli_num_rows($truck);
 		     if($num == 1){
 			   $er = "<div class = 'alert alert-danger flush'>A truck you are trying to register already exist!</div>";
 		      }else{
 			   $in = "insert into tms_trucks values('$id','$name','$model','$color','$btype','$fuel','$chasis','$pdate','$sup','$policyNO','$insu_type','$cont','$load_price','$com_date','$exp_date','$ins_date','$ins_exp_date','$su_price','$su_date','$su_exp_date')";
 			   
-			   $insert = mysql_query($in);
+			   $insert = $connect->query($in);
 			   if($insert){
 				   $er = "<div class = 'alert alert-success flush'>Successfully Registered</div>";
 			   }else{

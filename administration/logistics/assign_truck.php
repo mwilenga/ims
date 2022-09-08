@@ -7,13 +7,13 @@
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
     $id = $_GET['id'];
-    $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-	  $fetch_data = mysql_fetch_array($q);
+    $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+	  $fetch_data = mysqli_fetch_array($q);
 	  $create_auth = $fetch_data['create_auth'];
-	  $truck = mysql_real_escape_string($_POST['truck']);
-      $trailer = mysql_real_escape_string($_POST['trailer']);
-      $driver = mysql_real_escape_string($_POST['driver']);
-	  $descrip = mysql_real_escape_string($_POST['descrip']);
+	  $truck = mysqli_real_escape_string($_POST['truck']);
+      $trailer = mysqli_real_escape_string($_POST['trailer']);
+      $driver = mysqli_real_escape_string($_POST['driver']);
+	  $descrip = mysqli_real_escape_string($_POST['descrip']);
       $date = date('Y-m-d');
       $mon = date('m');
       $year = date('Y');
@@ -24,12 +24,12 @@
 	  else if($create_auth == 0){
 		 $er = "<div class = 'alert alert-danger flush'>Sorry! You don't have previllege to assign trip to truck,please see system administration</div>";
 	  }else{
-                 $up = mysql_query("update tms_loads set status=1,assigned_truck='$truck',assigned_driver='$driver',trailer = '$trailer' where id = '$id'");
+                 $up = $connect->query("update tms_loads set status=1,assigned_truck='$truck',assigned_driver='$driver',trailer = '$trailer' where id = '$id'");
                   if($up){
-                    $sel = mysql_query("select * from tms_loads where id = '$id'");
-                     $row = mysql_fetch_array($sel);
+                    $sel = $connect->query("select * from tms_loads where id = '$id'");
+                     $row = mysqli_fetch_array($sel);
                       $pr = $row['price'];
-                    $in = mysql_query("insert into tms_income values('','$date','$descrip','$pr','$mon','$year','$truck','$trailer')");
+                    $in = $connect->query("insert into tms_income values('','$date','$descrip','$pr','$mon','$year','$truck','$trailer')");
                     if($in){
                        $er = "<div class = 'alert alert-success flush'>Successfully Assigned</div>"; 
                     }else{
@@ -135,8 +135,8 @@
 
                                                     <option value = "">Select truck</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_trucks");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_trucks");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['truck_id'];?>"><?php echo $rw['truck_id'];?></option>
                                                     <?php
@@ -156,8 +156,8 @@
 
                                                     <option value = "">Select trailer</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_trucks");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_trucks");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['truck_id'];?>"><?php echo $rw['truck_id'];?></option>
                                                     <?php
@@ -176,8 +176,8 @@
                                                 <select class="form-control select" data-live-search="true" name="driver">
                                                     <option value = "">Select driver</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_drivers");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_drivers");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['name'];?>"><?php echo $rw['name'];?></option>
                                                     <?php

@@ -83,8 +83,8 @@
 							<div class="panel-heading">
                              <div class="panel-title-box">
                              <?php 
-                             $all = mysql_query("select * from tms_stock_take,tms_items where item = item_name and item = '$id'");
-                              $r = mysql_fetch_array($all);
+                             $all = $connect->query("select * from tms_stock_take,tms_items where item = item_name and item = '$id'");
+                              $r = mysqli_fetch_array($all);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;Item history (<?php echo $r['item'];?>-<?php echo $r['qnty'];
                                ?>)</h3>
@@ -98,8 +98,8 @@
                               
                                 <div class="panel-body">
                                  <?php
-                                 $s = mysql_query("select * from tms_stock_take,tms_items where item = item_name and item = '$id'");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_stock_take,tms_items where item = item_name and item = '$id'");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No data for this item....!</center></div>";
@@ -117,7 +117,7 @@
                                              </tr>
                                              <?php
                                              $a = 1;
-                                             while($rw=mysql_fetch_array($s)){
+                                             while($rw=mysqli_fetch_array($s)){
                                              ?>
                                              <tr>
                                                  <td><?php echo $a;?></td>

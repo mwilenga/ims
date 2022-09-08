@@ -1,6 +1,6 @@
 <?php
 require_once ('../dBConfig/dBConnect.php');
-$sth = mysql_query("SELECT * FROM tms_trucks");
+$sth = $connect->query("SELECT * FROM tms_trucks");
 $data = array();
 while($r = mysql_fetch_assoc($sth)) {
     $data[] = $r;

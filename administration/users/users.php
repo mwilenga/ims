@@ -85,8 +85,8 @@
                              <td width="78%">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_users");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_users");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>List of users&nbsp;(<?php echo $num;?>)</h3>
                              </td>

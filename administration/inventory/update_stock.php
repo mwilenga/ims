@@ -6,8 +6,8 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
    $id = $_GET['id'];
-    $data = mysql_query("select * from tms_items where id='$id'");
-    $rw = mysql_fetch_array($data);
+    $data = $connect->query("select * from tms_items where id='$id'");
+    $rw = mysqli_fetch_array($data);
      $name = $rw['item_name'];
      $barcode = $rw['barcode'];
      $cost = $rw['cost'];
@@ -16,19 +16,19 @@
 
     if(isset($_POST['update'])){
 
-      $qnty = mysql_real_escape_string($_POST['qnty']);
-      $date = mysql_real_escape_string($_POST['date']);
+      $qnty = mysqli_real_escape_string($_POST['qnty']);
+      $date = mysqli_real_escape_string($_POST['date']);
 
-       $al = mysql_query("select * from tms_items where id = '$id'");
-       $fetch = mysql_fetch_array($al);
+       $al = $connect->query("select * from tms_items where id = '$id'");
+       $fetch = mysqli_fetch_array($al);
        $q = $fetch['qnty'];
        $oq = $fetch['o_qnty'];
        $updt = $q + $qnty;
        $upd = $oq + $qnty;
 
-      $update = mysql_query("update tms_items set qnty = '$updt', o_qnty = '$upd' where id = '$id'");
+      $update = $connect->query("update tms_items set qnty = '$updt', o_qnty = '$upd' where id = '$id'");
       if($update){
-        $insert = mysql_query("insert into tms_item_in_history value('','$name','$barcode','$qnty','$cost','$supplier','$partno',
+        $insert = $connect->query("insert into tms_item_in_history value('','$name','$barcode','$qnty','$cost','$supplier','$partno',
             '$date')");
         if($insert){
            header('location:items.php'); 

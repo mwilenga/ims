@@ -79,8 +79,8 @@
                              <div class="panel-heading">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_customer");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_customer");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title">Remaining customers(<?php echo $num;?>)</h3>
                               <span style="float:right"><i class="fa fa-arrow-left"></i>&nbsp;<a href="customers.php"><b>Go back</b></a></span>

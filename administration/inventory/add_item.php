@@ -6,33 +6,33 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-	  $fetch_data = mysql_fetch_array($q);
+	  $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+	  $fetch_data = mysqli_fetch_array($q);
 	  $update_auth = $fetch_data['up_auth'];
-	  $name = strtoupper(mysql_real_escape_string($_POST['name']));
-      $qnty = mysql_real_escape_string($_POST['qnty']);
-      $bcode = mysql_real_escape_string($_POST['bcode']);
-      $purchased = mysql_real_escape_string($_POST['cost']);
-      $sup = mysql_real_escape_string($_POST['sup']);
-      $partno = mysql_real_escape_string($_POST['partno']);
-	  $date = mysql_real_escape_string($_POST['date']);
+	  $name = strtoupper(mysqli_real_escape_string($_POST['name']));
+      $qnty = mysqli_real_escape_string($_POST['qnty']);
+      $bcode = mysqli_real_escape_string($_POST['bcode']);
+      $purchased = mysqli_real_escape_string($_POST['cost']);
+      $sup = mysqli_real_escape_string($_POST['sup']);
+      $partno = mysqli_real_escape_string($_POST['partno']);
+	  $date = mysqli_real_escape_string($_POST['date']);
       //$date = date('Y-m-d');
       $mon = date('m');
       $year = date('Y');
 
-      $checks = mysql_query("select * from tms_items where item_name = '$name' and cost = '$purchased'");
-       $num = mysql_num_rows($checks);
+      $checks = $connect->query("select * from tms_items where item_name = '$name' and cost = '$purchased'");
+       $num = mysqli_num_rows($checks);
        if($num > 0){
-        $r = mysql_fetch_array($checks);
+        $r = mysqli_fetch_array($checks);
         $qn = $r['qnty']; 
         $q = $r['o_qnty'];
          $new = $qn + $qnty;
          $new1 = $q + $qnty;
-         $up = mysql_query("update tms_items set qnty='$new', o_qnty='$new1' where item_name='$name' and cost='$purchased'");
+         $up = $connect->query("update tms_items set qnty='$new', o_qnty='$new1' where item_name='$name' and cost='$purchased'");
 
          if($up){
 
-            $inside = mysql_query("insert into tms_item_in_history values('','$name','$bcode','$qnty','$purchased','$sup','$partno','$date')");
+            $inside = $connect->query("insert into tms_item_in_history values('','$name','$bcode','$qnty','$purchased','$sup','$partno','$date')");
             if($inside){
                $er = "<div class = 'alert alert-success flush'>Successfully stock updated</div>"; 
            }else{
@@ -44,9 +44,9 @@
        }else{
 
 	   $in = "insert into tms_items values('','$name','$bcode','$qnty','$qnty','$purchased','$sup','$partno','$date','".$_SESSION['name']."')";
-	   $insert = mysql_query($in);
+	   $insert = $connect->query($in);
 			   if($insert){
-                $inside = mysql_query("insert into tms_item_in_history values('','$name','$bcode','$qnty','$purchased','$sup','$partno','$date')");
+                $inside = $connect->query("insert into tms_item_in_history values('','$name','$bcode','$qnty','$purchased','$sup','$partno','$date')");
                 if($inside){
                    $er = "<div class = 'alert alert-success flush'>Successfully Saved.</div>"; 
                 }else{
@@ -200,8 +200,8 @@
                                                 <select class="form-control select" data-live-search="true" name="sup">
                                                     <option>Select</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_supplier");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_supplier");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['name'];?>"><?php echo $rw['name'];?></option>
                                                     <?php

@@ -1,6 +1,6 @@
 <?php
     require_once '../../../dBConfig/dBConnect.php';
-        $q = mysql_query("SELECT * FROM tms_stock_take ORDER BY id ASC");
+        $q = $connect->query("SELECT * FROM tms_stock_take ORDER BY id ASC");
 
 		     $html ='<center><img src = "../../../img/logo2.png" width="200" height="53" style = "margin-left:33%"/></center><br>
                <h3 style = "text-align:center;font-size:20px">STOCK TAKING REPORT</h3>
@@ -17,7 +17,7 @@
 
 					</tr>';
 				        $a = 1;
-				        while($rw = mysql_fetch_array($q)){
+				        while($rw = mysqli_fetch_array($q)){
 
 					$html .= '<tr>
 					<td>' . $a. ' </td>

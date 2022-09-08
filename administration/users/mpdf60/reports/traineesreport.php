@@ -5,10 +5,10 @@
         
     if(isset($_POST['submit'])){
 		$id = $_POST['id'];
-        $q = mysql_query("SELECT * FROM tbl_trainee WHERE Tno = '$id'");
-        $qr = mysql_query("SELECT * FROM tbl_training WHERE TID = '$id'");
-        $num = mysql_num_rows($q);
-        $rs = mysql_fetch_array($qr);
+        $q = $connect->query("SELECT * FROM tbl_trainee WHERE Tno = '$id'");
+        $qr = $connect->query("SELECT * FROM tbl_training WHERE TID = '$id'");
+        $num = mysqli_num_rows($q);
+        $rs = mysqli_fetch_array($qr);
         $kil = strtoupper($rs['trainingType']); 
         $dat1 = $rs['dataStarted']; 
         $dat2 = $rs['dateEnded'];
@@ -39,7 +39,7 @@
 	<th>Region</th>
 	</tr>';
           $a = 1;
-        while($rw = mysql_fetch_array($q)){
+        while($rw = mysqli_fetch_array($q)){
 	
 	$html .= '<tr>
 	<td>' . $a. ' </td>

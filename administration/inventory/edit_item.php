@@ -6,25 +6,25 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
    $id = $_GET['id'];
-    $data = mysql_query("select * from tms_items where id='$id'");
-    $rw = mysql_fetch_array($data);
+    $data = $connect->query("select * from tms_items where id='$id'");
+    $rw = mysqli_fetch_array($data);
 
     if(isset($_POST['update'])){
-      $name = strtoupper(mysql_real_escape_string($_POST['name']));
-      $qnty = mysql_real_escape_string($_POST['qnty']);
-      $cost = mysql_real_escape_string($_POST['cost']);
-      $bcode = mysql_real_escape_string($_POST['bcode']);
-      $partno = mysql_real_escape_string($_POST['patno']);
-      $received_by = mysql_real_escape_string($_POST['received_by']);
+      $name = strtoupper(mysqli_real_escape_string($_POST['name']));
+      $qnty = mysqli_real_escape_string($_POST['qnty']);
+      $cost = mysqli_real_escape_string($_POST['cost']);
+      $bcode = mysqli_real_escape_string($_POST['bcode']);
+      $partno = mysqli_real_escape_string($_POST['patno']);
+      $received_by = mysqli_real_escape_string($_POST['received_by']);
 
-      $al = mysql_query("select * from tms_items where id = '$id'");
-       $fetch = mysql_fetch_array($al);
+      $al = $connect->query("select * from tms_items where id = '$id'");
+       $fetch = mysqli_fetch_array($al);
        $q = $fetch['qnty'];
        $oq = $fetch['o_qnty'];
        $n = $oq - $q;
        $updt = $n + $qnty;
 
-      $update = mysql_query("update tms_items set item_name = '$name', qnty = '$qnty', o_qnty = $updt, cost = '$cost', barcode = '$bcode',
+      $update = $connect->query("update tms_items set item_name = '$name', qnty = '$qnty', o_qnty = $updt, cost = '$cost', barcode = '$bcode',
       part_no = '$partno', received_by = '$received_by' where id = '$id'");
       if($update){
         header('location:items.php');

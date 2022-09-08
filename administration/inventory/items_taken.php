@@ -79,9 +79,9 @@
                                 <div class="panel-heading">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $all = mysql_query("select * from tms_stock_take");
-                             $n = mysql_num_rows($all)
-                             // $nam = mysql_num_rows($all);
+                             $all = $connect->query("select * from tms_stock_take");
+                             $n = mysqli_num_rows($all)
+                             // $nam = mysqli_num_rows($all);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of items taken (<?php echo $n;?>)</h3>
                                 <ul class="panel-controls" style="margin-top: 2px;">
@@ -91,8 +91,8 @@
                               </div>                                    
                                 <div class="panel-body"> 
                                 <?php
-                                 $s = mysql_query("select * from tms_stock_take");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_stock_take");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No supplier added yet.....!</center></div>";

@@ -6,18 +6,18 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   $id = $_GET['id'];
-   $dat = mysql_query("select * from tms_users where id = '$id'");
-    $data = mysql_fetch_array($dat);
+   $dat = $connect->query("select * from tms_users where id = '$id'");
+    $data = mysqli_fetch_array($dat);
 
 
   if(isset($_POST['save'])){
-	  $create = ucfirst(mysql_real_escape_string($_POST['create']));
-	  $view = mysql_real_escape_string($_POST['view']);
-      $update = mysql_real_escape_string($_POST['update']);
-      $delete = mysql_real_escape_string($_POST['delete']);
+	  $create = ucfirst(mysqli_real_escape_string($_POST['create']));
+	  $view = mysqli_real_escape_string($_POST['view']);
+      $update = mysqli_real_escape_string($_POST['update']);
+      $delete = mysqli_real_escape_string($_POST['delete']);
 
       //590c81789bf56
-	  $update = mysql_query("update tms_users set create_auth='$create',up_auth='$update',del_auth='$delete',view_auth='$view' where id='$id'");
+	  $update = $connect->query("update tms_users set create_auth='$create',up_auth='$update',del_auth='$delete',view_auth='$view' where id='$id'");
 
       if($update){
         header('location:user_permisions.php');

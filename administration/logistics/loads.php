@@ -79,8 +79,8 @@
                              <div class="panel-title-box">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_loads where status = 0");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_loads where status = 0");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of created trips &nbsp;(<?php echo $num;?>)</h3>
                               </div>                                    
@@ -93,8 +93,8 @@
 							 
                                 <div class="panel-body">
 								<?php
-								 $loads = mysql_query("select * from tms_loads where status = 0");
-								 if(mysql_num_rows($loads) < 1){
+								 $loads = $connect->query("select * from tms_loads where status = 0");
+								 if(mysqli_num_rows($loads) < 1){
 								 ?>
 								 <div class="alert alert-warning">No trip assigned yet....!</div>
 								 <?php

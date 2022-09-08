@@ -91,8 +91,8 @@
                                 </div> 
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $trucks = mysql_query("select * from tms_trucks");
-                                 $num = mysql_num_rows($trucks);
+                                $trucks = $connect->query("select * from tms_trucks");
+                                 $num = mysqli_num_rows($trucks);
                                 ?>                            
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $num;?></div>
@@ -115,8 +115,8 @@
                                 </div> 
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $drivers = mysql_query("select * from tms_drivers");
-                                 $nam = mysql_num_rows($drivers);
+                                $drivers = $connect->query("select * from tms_drivers");
+                                 $nam = mysqli_num_rows($drivers);
                                 ?>                              
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $nam;?></div>
@@ -138,8 +138,8 @@
                                 </div>
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $loads = mysql_query("select * from tms_loads where status=0");
-                                 $nm = mysql_num_rows($loads);
+                                $loads = $connect->query("select * from tms_loads where status=0");
+                                 $nm = mysqli_num_rows($loads);
                                 ?>   
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $nm;?></div>

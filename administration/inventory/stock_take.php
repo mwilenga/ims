@@ -6,29 +6,29 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $name = strtoupper(mysql_real_escape_string($_POST['name']));
-	  $qnty = mysql_real_escape_string($_POST['qnty']);
-      $truck = mysql_real_escape_string($_POST['truck']);
-      $descript = ucfirst(mysql_real_escape_string($_POST['descript']));
-      $date = mysql_real_escape_string($_POST['date']);
-      $jobcard = mysql_real_escape_string($_POST['jobcard']);
-	  $auth = mysql_real_escape_string($_POST['authby']);
+	  $name = strtoupper(mysqli_real_escape_string($_POST['name']));
+	  $qnty = mysqli_real_escape_string($_POST['qnty']);
+      $truck = mysqli_real_escape_string($_POST['truck']);
+      $descript = ucfirst(mysqli_real_escape_string($_POST['descript']));
+      $date = mysqli_real_escape_string($_POST['date']);
+      $jobcard = mysqli_real_escape_string($_POST['jobcard']);
+	  $auth = mysqli_real_escape_string($_POST['authby']);
       //$date = date('Y-m-d');
       $mon = date('m');
       $year = date('Y');
 
 	  $in = "insert into tms_stock_take values('','$name','$qnty','$truck','$date','$mon','$year','$jobcard','$auth')";
-	   $insert = mysql_query($in);
+	   $insert = $connect->query($in);
 			   if($insert){
-                $check = mysql_query("select * from tms_items where item_name = '$name'");
-                 $ch = mysql_fetch_array($check);
+                $check = $connect->query("select * from tms_items where item_name = '$name'");
+                 $ch = mysqli_fetch_array($check);
                  $tr = $ch['cost'];
                  $ded = $ch['qnty'];
                  $total = $tr * $qnty;
-                 $inexpenses = mysql_query("insert into tms_expenses values('','$truck','$total','$descript','$date','$mon','$year')");
+                 $inexpenses = $connect->query("insert into tms_expenses values('','$truck','$total','$descript','$date','$mon','$year')");
                  if($inexpenses){
                    $update = $ded - $qnty;
-                   $n = mysql_query("update tms_items set qnty = '$update' where item_name = '$name'"); 
+                   $n = $connect->query("update tms_items set qnty = '$update' where item_name = '$name'"); 
                     if($n){
                         $er = "<div class = 'alert alert-success flush'>Successfully Stock Taken</div>";
                     }else{
@@ -138,8 +138,8 @@
                                     <select class="form-control select" data-live-search="true" name="name" required>
                                                     <option>Select</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_items");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_items");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['item_name'];?>"><?php echo $rw['item_name'];?></option>
                                                     <?php
@@ -166,8 +166,8 @@
                                            <select class="form-control select" data-live-search="true" name="truck" required>
                                                     <option>Select</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_trucks");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_trucks");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['truck_id'];?>"><?php echo $rw['truck_id'];?></option>
                                                     <?php

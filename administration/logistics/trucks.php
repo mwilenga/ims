@@ -79,8 +79,8 @@
                              <div class="panel-title-box">
                             <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_trucks");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_trucks");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of registered trucks (<?php echo $num;?>)</h3>
                               </div>                                    

@@ -3,7 +3,7 @@
 
 	mysql_connect("localhost","kioo_Admin","HLLvBMQw9tjbBetU");
         mysql_select_db("kioo_tmisdb");
-        $q = mysql_query("SELECT * FROM tbl_training");
+        $q = $connect->query("SELECT * FROM tbl_training");
        
        
 	
@@ -25,7 +25,7 @@
 	<th>No of trainees</th>
 	</tr>';
 
-        while($rw = mysql_fetch_array($q)){
+        while($rw = mysqli_fetch_array($q)){
 	
 	$html .= '<tr>
 	<td>' . $rw['TID'] . ' </td>

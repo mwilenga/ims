@@ -6,8 +6,8 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
  $id = $_GET['id'];
- $qa = mysql_query("SELECT * FROM sms_vehicle WHERE customer = '$id'");
- $num = mysql_num_rows($qa);
+ $qa = $connect->query("SELECT * FROM sms_vehicle WHERE customer = '$id'");
+ $num = mysqli_num_rows($qa);
 }
 ?>
 <!DOCTYPE html>
@@ -76,8 +76,8 @@
 				<div class="page-content-wrap page-tabs-item active" id="first-tab">
                 
                    <?php
-				$q = mysql_query("SELECT * FROM sms_vehicle WHERE customer = '$id'");
-				$num = mysql_num_rows($q);
+				$q = $connect->query("SELECT * FROM sms_vehicle WHERE customer = '$id'");
+				$num = mysqli_num_rows($q);
 				if($num == 0){
 					
 					echo "<p style = 'color:red;padding-left:50px;font-weight:bold'>No any record yet</p>";
@@ -101,7 +101,7 @@
                                             </thead>
                                         <tbody>
 										 <?php
-										  while($rws = mysql_fetch_array($q)){
+										  while($rws = mysqli_fetch_array($q)){
 										 ?>
                                           <tr>
                                             <td><?php echo $rws['vehicle'];?></td>

@@ -1,6 +1,6 @@
 <?php
     require_once '../../../dBConfig/dBConnect.php';
-        $q = mysql_query("SELECT * FROM tms_item_in_history ORDER BY id ASC");
+        $q = $connect->query("SELECT * FROM tms_item_in_history ORDER BY id ASC");
 
 		     // <img src = "kiooLogo/ioo.png" width = "180px" height = "120px" style = "margin-left:40%"/>
                $html ='<h3 style = "text-align:center;font-size:20px">TSN STOCK IN REPORT</h3>
@@ -15,7 +15,7 @@
 					<th>Supplier</th>
 					</tr>';
 				        $a = 1;
-				        while($rw = mysql_fetch_array($q)){
+				        while($rw = mysqli_fetch_array($q)){
 
 					$html .= '<tr>
 					<td>' . $a. ' </td>

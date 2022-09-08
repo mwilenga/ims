@@ -6,18 +6,18 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   $id = $_GET['id'];
-   $dat = mysql_query("select * from tms_users where id = '$id'");
-    $data = mysql_fetch_array($dat);
+   $dat = $connect->query("select * from tms_users where id = '$id'");
+    $data = mysqli_fetch_array($dat);
 
 
   if(isset($_POST['update'])){
-	  $name = ucfirst(mysql_real_escape_string($_POST['name']));
-	  $username = mysql_real_escape_string($_POST['username']);
-      $phone = mysql_real_escape_string($_POST['phone']);
-      $role = mysql_real_escape_string($_POST['role']);
+	  $name = ucfirst(mysqli_real_escape_string($_POST['name']));
+	  $username = mysqli_real_escape_string($_POST['username']);
+      $phone = mysqli_real_escape_string($_POST['phone']);
+      $role = mysqli_real_escape_string($_POST['role']);
 
       //590c81789bf56
-	  $update = mysql_query("update tms_users set name='$name',username='$username',phone='$phone',role='$role' where id='$id'");
+	  $update = $connect->query("update tms_users set name='$name',username='$username',phone='$phone',role='$role' where id='$id'");
 
       if($update){
         header('location:users.php');

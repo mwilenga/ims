@@ -111,8 +111,8 @@
                               
                                 <div class="panel-body">
                                  <?php
-                                 $s = mysql_query("select * from tms_item_in_history");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_item_in_history");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No data recoreded yet.....!</center></div>";
@@ -129,9 +129,9 @@
                                              <th>Supplier</th>
                                              </tr>
                                              <?php
-                                             $dat = mysql_query("select * from tms_item_in_history order by id desc");
+                                             $dat = $connect->query("select * from tms_item_in_history order by id desc");
                                              $a = 1;
-                                              while($data=mysql_fetch_array($dat)){
+                                              while($data=mysqli_fetch_array($dat)){
                                              ?>
                                              <tr>
                                                  <td><?php echo $a; ?></td>

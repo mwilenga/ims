@@ -3,7 +3,7 @@
 
 	mysql_connect("localhost","kioo_Admin","HLLvBMQw9tjbBetU");
         mysql_select_db("kioo_tmisdb");
-        $q = mysql_query("SELECT * FROM tbl_meeting");
+        $q = $connect->query("SELECT * FROM tbl_meeting");
        
        
 	
@@ -18,7 +18,7 @@
 	<th>Date and timed</th>
 	</tr>';
 
-        while($rw = mysql_fetch_array($q)){
+        while($rw = mysqli_fetch_array($q)){
 	
 	$html .= '<tr>
 	<td>' . $rw['MID'] . ' </td>

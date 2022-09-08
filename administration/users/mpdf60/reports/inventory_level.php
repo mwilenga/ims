@@ -1,6 +1,6 @@
 <?php
     require_once '../../../dBConfig/dBConnect.php';
-        $q = mysql_query("SELECT * FROM tms_items ORDER BY id ASC");
+        $q = $connect->query("SELECT * FROM tms_items ORDER BY id ASC");
 
 		     // <img src = "kiooLogo/ioo.png" width = "180px" height = "120px" style = "margin-left:40%"/>
                $html ='<h3 style = "text-align:center;font-size:20px">TSN STOCK LEVEL STATUS</h3>
@@ -14,7 +14,7 @@
 					<th>qnty remain</th>
 					</tr>';
 				        $a = 1;
-				        while($rw = mysql_fetch_array($q)){
+				        while($rw = mysqli_fetch_array($q)){
 					      $used = $rw['o_qnty'] - $rw['qnty'];
 					$html .= '<tr>
 					<td>' . $a. ' </td>

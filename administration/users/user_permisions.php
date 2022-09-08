@@ -5,7 +5,7 @@
   exit;
  }else{
   require_once('../dBConfig/dBConnect.php');
-  $all = mysql_query("select * from tms_users");
+  $all = $connect->query("select * from tms_users");
 }
 ?>
 <!DOCTYPE html>
@@ -101,7 +101,7 @@
                                              <tbody>
                                              <?php
                                              $a = 1;
-                                             while ($rw=mysql_fetch_array($all)) {
+                                             while ($rw=mysqli_fetch_array($all)) {
                                                 $cr = $rw['create_auth'];
                                                 if($cr == 1){
                                                     $c = "Yes";

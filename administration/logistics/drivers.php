@@ -81,8 +81,8 @@
                              <div class="panel-title-box">
                             <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_drivers");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_drivers");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of registered drivers(<?php echo $num;?>)</h3>
                               </div>                                    

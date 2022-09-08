@@ -76,8 +76,8 @@
                 <div class="page-content-wrap page-tabs-item active" id="fourth-tab">
                 
                 <?php
-				$sup = mysql_query("SELECT * FROM sms_supplied WHERE supplier = '$id' ORDER BY reg_date ASC");
-				$num = mysql_num_rows($sup);
+				$sup = $connect->query("SELECT * FROM sms_supplied WHERE supplier = '$id' ORDER BY reg_date ASC");
+				$num = mysqli_num_rows($sup);
 				if($num == 0){
 					
 					echo "<p style = 'color:red;padding-left:50px;font-weight:bold'>No any history added yet</p>";
@@ -104,7 +104,7 @@
                                             </thead>
                                         <tbody>
 										 <?php
-										  while($rws = mysql_fetch_array($sup)){
+										  while($rws = mysqli_fetch_array($sup)){
 										 ?>
                                           <tr>
                                             <td><?php echo $rws['invoice_date'];?></td>

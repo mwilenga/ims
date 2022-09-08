@@ -11,7 +11,7 @@
 	$name = "Julius Mwakajeba";
 	mysql_connect("localhost","root","konyo");
         mysql_select_db("eDMS");
-        $q = mysql_query("SELECT * FROM UserAccount");
+        $q = $connect->query("SELECT * FROM UserAccount");
        
         
 	
@@ -22,7 +22,7 @@
 	<th>Unit</th>
 	</tr>';
 
-        while($rw = mysql_fetch_array($q)){
+        while($rw = mysqli_fetch_array($q)){
 	
 	$html .= '<tr>
 	<td>' . $rw['Fullname'] . ' </td>

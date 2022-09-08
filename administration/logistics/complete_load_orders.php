@@ -79,8 +79,8 @@
 							 <td width="65%">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $sel = mysql_query("select * from tms_loads where status=2");
-                              $num = mysql_num_rows($sel);
+                             $sel = $connect->query("select * from tms_loads where status=2");
+                              $num = mysqli_num_rows($sel);
                              ?>
                                <h3 class="panel-title">Completed trips&nbsp;(<?php echo $num;?>)</h3>
 							 </td>

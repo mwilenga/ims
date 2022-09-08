@@ -6,30 +6,30 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $name = ucfirst(mysql_real_escape_string($_POST['name']));
-	  $username = mysql_real_escape_string($_POST['username']);
-      $phone = mysql_real_escape_string($_POST['phone']);
-      $role = mysql_real_escape_string($_POST['role']);
+	  $name = ucfirst(mysqli_real_escape_string($_POST['name']));
+	  $username = mysqli_real_escape_string($_POST['username']);
+      $phone = mysqli_real_escape_string($_POST['phone']);
+      $role = mysqli_real_escape_string($_POST['role']);
       $status = "Yes";
-      $create = mysql_real_escape_string($_POST['create']);
+      $create = mysqli_real_escape_string($_POST['create']);
       if($create == 1){
         $cr = 1;
       }else{
         $cr = 0;
       }
-      $view = mysql_real_escape_string($_POST['view']);
+      $view = mysqli_real_escape_string($_POST['view']);
       if($view == 1){
         $vw = 1;
       }else{
         $vw = 0;
       }
-      $upd = mysql_real_escape_string($_POST['update']);
+      $upd = mysqli_real_escape_string($_POST['update']);
       if($upd == 1){
         $up = 1;
       }else{
         $up = 0;
       }
-	  $del = mysql_real_escape_string($_POST['delete_user']);
+	  $del = mysqli_real_escape_string($_POST['delete_user']);
       if($del == 1){
         $dlt = 1;
       }else{
@@ -37,7 +37,7 @@
       }
       //590c81789bf56
 	  $in = "insert into tms_users values('','$name','$username','590c81789bf56','$role','$status','$phone','$up','$cr','$dlt','$vw')";
-	   $insert = mysql_query($in);
+	   $insert = $connect->query($in);
 			   if($insert){
 				   $er = "<div class = 'alert alert-success flush'>Successfully Registered</div>";
 			   }else{

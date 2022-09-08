@@ -7,9 +7,9 @@
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
     $id = $_GET['id'];
-	  $return = mysql_real_escape_string($_POST['return']);
+	  $return = mysqli_real_escape_string($_POST['return']);
 
-       $up = mysql_query("update tms_loads set return_date='$return',status=2 where id = '$id'");
+       $up = $connect->query("update tms_loads set return_date='$return',status=2 where id = '$id'");
                   if($up){
                     $er = "<div class = 'alert alert-success flush'>Successfully Recorded</div>";
                   } else{

@@ -97,8 +97,8 @@
                               
                                 <div class="panel-body">
                                  <?php
-                                 $s = mysql_query("select * from tms_items");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_items");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No supplier added yet.....!</center></div>";
@@ -114,9 +114,9 @@
                                              <th>Qnty in stock</th>
                                              </tr>
                                              <?php
-                                             $dat = mysql_query("select * from tms_items");
+                                             $dat = $connect->query("select * from tms_items");
                                              $a = 1;
-                                              while($data=mysql_fetch_array($dat)){
+                                              while($data=mysqli_fetch_array($dat)){
                                                $used = $data['o_qnty'] - $data['qnty'];
                                              ?>
                                              <tr dir-paginate = "" | itemsPerPage : 4>

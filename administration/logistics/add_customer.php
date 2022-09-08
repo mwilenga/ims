@@ -6,12 +6,12 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-  $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-   $fetch_data = mysql_fetch_array($q);
+  $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+   $fetch_data = mysqli_fetch_array($q);
    $create_auth = $fetch_data['crea_auth'];
-	  $name = strtoupper(mysql_real_escape_string($_POST['name']));
-	  $cont = mysql_real_escape_string($_POST['cont']);
-	  $loc = strtoupper(mysql_real_escape_string($_POST['loc']));
+	  $name = strtoupper(mysqli_real_escape_string($_POST['name']));
+	  $cont = mysqli_real_escape_string($_POST['cont']);
+	  $loc = strtoupper(mysqli_real_escape_string($_POST['loc']));
    if($name == '' || $cont == '' || $loc == ''){
      $er = "<div class = 'alert alert-danger flush'>Sorry Fill the empty field</div>";
    }
@@ -20,7 +20,7 @@
 	  }
    else{
 	  $in = "insert into tms_customer values('','$name','$cont','$loc')";
-	   $insert = mysql_query($in);
+	   $insert = $connect->query($in);
 			   if($insert){
 				   $er = "<div class = 'alert alert-success flush'>Successfully Registered</div>";
 			   }else{

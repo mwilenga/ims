@@ -6,8 +6,8 @@
  }else{
   $id = $_GET['id'];
   require_once('../dBConfig/dBConnect.php');
-   $all = mysql_query("select * from tms_trucks where truck_id = '$id'");
-   $rw = mysql_fetch_array($all);
+   $all = $connect->query("select * from tms_trucks where truck_id = '$id'");
+   $rw = mysqli_fetch_array($all);
 }
 ?>
 <!DOCTYPE html>

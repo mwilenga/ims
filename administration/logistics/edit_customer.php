@@ -7,24 +7,24 @@
 
   require_once('../dBConfig/dBConnect.php');
   $id = $_GET['id'];
-     $data = mysql_query("select * from tms_customer where id = '$id'");
-      $rw = mysql_fetch_array($data);
+     $data = $connect->query("select * from tms_customer where id = '$id'");
+      $rw = mysqli_fetch_array($data);
 
   if(isset($_POST['submit'])){
 
       //update data
-	  $name = ucfirst(mysql_real_escape_string($_POST['name']));
-	  $cont = mysql_real_escape_string($_POST['cont']);
-	  $loc = ucfirst(mysql_real_escape_string($_POST['loc']));
-      $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-	  $fetch_data = mysql_fetch_array($q);
+	  $name = ucfirst(mysqli_real_escape_string($_POST['name']));
+	  $cont = mysqli_real_escape_string($_POST['cont']);
+	  $loc = ucfirst(mysqli_real_escape_string($_POST['loc']));
+      $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+	  $fetch_data = mysqli_fetch_array($q);
 	  $update_auth = $fetch_data['up_auth'];
       if($update_auth == 0){
 			 $er = "<div class = 'alert alert-danger flush'>Sorry! You don't have previllege to edit customer informations,please see system administration</div>";
 	  }
 	  else{
 	  $in = "update tms_customer set customer_name = '$name', contact='$cont', location='$loc' where id='$id'";
-	   $up = mysql_query($in);
+	   $up = $connect->query($in);
 			   if($up){
 				   header('location:customers.php');
 			   }else{

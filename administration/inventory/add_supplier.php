@@ -6,13 +6,13 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-	  $fetch_data = mysql_fetch_array($q);
-	  $create_auth = $fetch_data['crea_auth'];
-	  $name = strtoupper(mysql_real_escape_string($_POST['name']));
-      $cont = mysql_real_escape_string($_POST['cont']);
-	  $email = mysql_real_escape_string($_POST['email']);
-	  $loc = ucfirst(mysql_real_escape_string($_POST['loc']));
+	  $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+	  $fetch_data = mysqli_fetch_array($q);
+	  $create_auth = $fetch_data['create_auth'];
+	  $name = strtoupper($_POST['name']);
+      $cont = $_POST['cont'];
+	  $email = $_POST['email'];
+	  $loc = ucfirst($_POST['loc']);
 
       if($name == ''){
         $er = "<div class = 'alert alert-danger flush'>Fill the empty fields</div>";
@@ -21,12 +21,12 @@
 			 $er = "<div class = 'alert alert-danger flush'>Sorry! You don't have previllege to add supplier informations,please see system administration</div>";
 	  }
       else{
-        $check = mysql_query("select * from tms_supplier where name = '$name' and contact = '$cont' and email = '$email'");
-         if(mysql_num_rows($check) > 0){
+        $check = $connect->query("select * from tms_supplier where name = '$name' and contact = '$cont' and email = '$email'");
+         if(mysqli_num_rows($check) > 0){
            $er = "<div class = 'alert alert-danger flush'>Sorry...customer your trying to register exist. </div>";
         }else{
 	  $in = "insert into tms_supplier values('','$name','$cont','$email','$loc')";
-	   $insert = mysql_query($in);
+	   $insert = $connect->query($in);
 			   if($insert){
 				   $er = "<div class = 'alert alert-success flush'>Successfully Added....!</div>";
 			   }else{

@@ -91,8 +91,8 @@
                                 </div> 
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $trucks = mysql_query("select * from tms_items");
-                                 $num = mysql_num_rows($trucks);
+                                $trucks = $connect->query("select * from tms_items");
+                                 $num = mysqli_num_rows($trucks);
                                 ?>                            
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $num;?></div>
@@ -115,8 +115,8 @@
                                 </div> 
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $item_in = mysql_query("select * from tms_item_in_history");
-                                 $nam = mysql_num_rows($item_in);
+                                $item_in = $connect->query("select * from tms_item_in_history");
+                                 $nam = mysqli_num_rows($item_in);
                                 ?>                              
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $nam;?></div>
@@ -138,8 +138,8 @@
                                 </div>
                                 <?php 
                                 require_once('../dBConfig/dBConnect.php');
-                                $out = mysql_query("select * from tms_stock_take");
-                                 $nm = mysql_num_rows($out);
+                                $out = $connect->query("select * from tms_stock_take");
+                                 $nm = mysqli_num_rows($out);
                                 ?>   
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?php echo $nm;?></div>

@@ -93,8 +93,8 @@
                               
                                 <div class="panel-body">
                                  <?php
-                                 $s = mysql_query("select * from tms_stock_take");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_stock_take");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No data recoreded yet.....!</center></div>";
@@ -112,9 +112,9 @@
                                              <th>Authirized By</th>
                                              </tr>
                                              <?php
-                                             $dat = mysql_query("select * from tms_stock_take order by id asc");
+                                             $dat = $connect->query("select * from tms_stock_take order by id asc");
                                              $a = 1;
-                                              while($data=mysql_fetch_array($dat)){
+                                              while($data=mysqli_fetch_array($dat)){
                                              ?>
                                              <tr>
                                                  <td><?php echo $a; ?></td>

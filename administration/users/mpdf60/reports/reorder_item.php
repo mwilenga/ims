@@ -1,9 +1,9 @@
 <?php
     require_once '../../../dBConfig/dBConnect.php';
-        $ql = mysql_query("SELECT * FROM sms_level");
-		$rs = mysql_fetch_array($ql);
+        $ql = $connect->query("SELECT * FROM sms_level");
+		$rs = mysqli_fetch_array($ql);
 		$level = $rs['level'];
-		$q = mysql_query("SELECT * FROM sms_stock WHERE orderlevel <= $level ORDER BY item ASC ");
+		$q = $connect->query("SELECT * FROM sms_stock WHERE orderlevel <= $level ORDER BY item ASC ");
 
 		$html ='<img src = "kiooLogo/ioo.png" width = "180px" height = "120px" style = "margin-left:40%"/>
 		        <h1 style = "text-align:center;">VICTORIA STATIONS</h1>
@@ -16,7 +16,7 @@
 	<th>Stock unit</th>
 	</tr>';
         $a = 1;
-        while($rw = mysql_fetch_array($q)){
+        while($rw = mysqli_fetch_array($q)){
 	
 	$html .= '<tr>
 	<td>' . $a. ' </td>

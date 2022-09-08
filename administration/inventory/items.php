@@ -81,8 +81,8 @@
                              <div class="panel-title-box">
                              <?php 
                              require_once("../dBConfig/dBConnect.php");
-                             $all = mysql_query("select * from tms_items");
-                             $n = mysql_num_rows($all)
+                             $all = $connect->query("select * from tms_items");
+                             $n = mysqli_num_rows($all)
                              ?>
                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;List of registered items (<?php echo $n;?>)</h3>
                               </div>                                    
@@ -105,8 +105,8 @@
                                         </div>
                                  </div><br>
                                  <?php
-                                 $s = mysql_query("select * from tms_stock_take");
-                                  $num = mysql_num_rows($s);
+                                 $s = $connect->query("select * from tms_stock_take");
+                                  $num = mysqli_num_rows($s);
                                   if($num < 1){
 
                                     echo "<div class='alert alert-warning'><center>No Spplier Added Yet.....!</center></div>";

@@ -6,14 +6,14 @@
  }else{
   require_once('../dBConfig/dBConnect.php');
   if(isset($_POST['submit'])){
-	  $from = strtoupper(mysql_real_escape_string($_POST['from']));
-	  $to = strtoupper(mysql_real_escape_string($_POST['to']));
-      $name = strtoupper(mysql_real_escape_string($_POST['name']));
-      $price = mysql_real_escape_string($_POST['price']);
-	  $date = mysql_real_escape_string($_POST['date']);
-	  $note = ucfirst(mysql_real_escape_string($_POST['note']));
-      $q = mysql_query("select * from tms_users where id = '".$_SESSION['id']."'");
-	  $fetch_data = mysql_fetch_array($q);
+	  $from = strtoupper(mysqli_real_escape_string($_POST['from']));
+	  $to = strtoupper(mysqli_real_escape_string($_POST['to']));
+      $name = strtoupper(mysqli_real_escape_string($_POST['name']));
+      $price = mysqli_real_escape_string($_POST['price']);
+	  $date = mysqli_real_escape_string($_POST['date']);
+	  $note = ucfirst(mysqli_real_escape_string($_POST['note']));
+      $q = $connect->query("select * from tms_users where id = '".$_SESSION['id']."'");
+	  $fetch_data = mysqli_fetch_array($q);
 	  $create_auth = $fetch_data['create_auth'];
 	  if($from == '' || $to == '' || $price == '' || $date == '' || $name == ''){
 		  $er = "<div class = 'alert alert-danger flush'>Sorry fill the empty field(s)</div>";
@@ -22,14 +22,14 @@
 		// $er = "<div class = 'alert alert-danger flush'>Sorry! You don't have previllege to create new trip,please see system administration</div>";
 	 // }
 	 // else{
-	       $sel = mysql_query("select * from tms_loads where load_from = '$from' and load_to = '$to' and customer = '$name' and date = '$date'");
-		   $num = mysql_num_rows($sel);
+	       $sel = $connect->query("select * from tms_loads where load_from = '$from' and load_to = '$to' and customer = '$name' and date = '$date'");
+		   $num = mysqli_num_rows($sel);
 	        if($num > 0){
 			 $er = "<div class = 'alert alert-danger flush'>Sorry! this trip has already registered</div>";
 			}
 			else{
 			   $in = "insert into tms_loads values('','$from','$to','$name','$note','$price','$date','','','','','')";
-			   $insert = mysql_query($in);
+			   $insert = $connect->query($in);
 			   if($insert){
 				   $er = "<div class = 'alert alert-success flush'>Successfully registered</div>";
 			   }else{
@@ -156,8 +156,8 @@
 
                                                 <option value = "">Select customer</option>
                                                     <?php
-                                                 $sel = mysql_query("select * from tms_customer");
-                                                  while($rw=mysql_fetch_array($sel)){
+                                                 $sel = $connect->query("select * from tms_customer");
+                                                  while($rw=mysqli_fetch_array($sel)){
                                                 ?>
                                                 <option value="<?php echo $rw['customer_name'];?>"><?php echo $rw['customer_name'];?></option>
                                                     <?php

@@ -7,7 +7,7 @@
  require_once("../dBConfig/dBConnect.php");
   $id = $_GET['id'];
 
-  $sel = mysql_query("select * from tms_item_in_history where supplier='$id'");
+  $sel = $connect->query("select * from tms_item_in_history where supplier='$id'");
 }
 ?>
 <!DOCTYPE html>
@@ -84,8 +84,8 @@
                              <div class="panel-heading">
                              <div class="panel-title-box">
                              <?php
-                             $se = mysql_query("select * from tms_items where supplier='$id'");
-                             $rw = mysql_fetch_array($se);
+                             $se = $connect->query("select * from tms_items where supplier='$id'");
+                             $rw = mysqli_fetch_array($se);
                              ?>
                             
                                <h3 class="panel-title">Supplier History&nbsp; (<?php echo $rw['supplier'];?>)</h3>
@@ -110,7 +110,7 @@
                                              <tbody>
                                              <?php
                                              $a = 1;
-                                             while($rows=mysql_fetch_array($sel)){
+                                             while($rows=mysqli_fetch_array($sel)){
                                              ?>
                                              <tr>
                                                  <td><?php echo $a;?></td>
